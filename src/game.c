@@ -113,9 +113,9 @@ void game_update(double dt, double ft)
 ctrl_end:
 
   if (ex_keys_down[SDL_SCANCODE_F]) {
-    float r = (float)rand()/(float)(RAND_MAX/1.0f);
-    float g = (float)rand()/(float)(RAND_MAX/1.0f);
-    float b = (float)rand()/(float)(RAND_MAX/1.0f);
+    float r = 1.0f;
+    float g = 1.0f;
+    float b = 1.0f;
     ex_point_light_t *l = ex_point_light_new((vec3){0.0f, 0.0f, 0.0f}, (vec3){r, g, b}, 0);
     memcpy(l->position, camera->position, sizeof(vec3));
     ex_scene_add_pointlight(scene, l);
@@ -180,15 +180,11 @@ ctrl_end:
   ex_vga_clear();
 
   char buf[64];
-  ex_vga_setfg(255, 255, 255, 255);
-  ex_vga_setbg(0, 0, 0, 255);
-  sprintf(buf, "exengine dbg build %c", 1);
-  ex_vga_print(2, 1, buf);
 
   sprintf(buf, "framerate %.2f", 1.0 / ft);
   ex_vga_setfg(255, 255, 0, 255);
   ex_vga_setbg(255, 255, 255, 0);
-  ex_vga_print(2, 2, buf);
+  ex_vga_print(2, 1, buf);
 }
 
 void game_draw()
