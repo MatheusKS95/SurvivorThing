@@ -128,14 +128,14 @@ ex_font_t* ex_font_load(const char *path, const char *letters)
   return f;
 }
 
-void ex_font_dbg(ex_font_t *f)
+void ex_font_dbg(ex_font_t *f, const char *str, float x, float y, float w, float h)
 {
-  char *str = "Heljo World! this is a test";
+  //char *str = "Heljo World! this is a test";
   // float w = 16.0f, h = 16.0f;
-  float w = 128.0f, h = 128.0f;
-  double t = (double)SDL_GetPerformanceCounter() / (double)SDL_GetPerformanceFrequency();
-  w += 112.0f * cos(t * 0.5);
-  h += 112.0f * cos(t * 0.5);
+  //float w = 128.0f, h = 128.0f;
+  //double t = (double)SDL_GetPerformanceCounter() / (double)SDL_GetPerformanceFrequency();
+  //w += 112.0f * cos(t * 0.5);
+  //h += 112.0f * cos(t * 0.5);
 
   glUseProgram(text_shader);
   glBindVertexArray(text_vao);
@@ -148,7 +148,8 @@ void ex_font_dbg(ex_font_t *f)
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glViewport(0, 0, 1280, 720);
 
-  float x = 32.0f, y = 0.0f, sy = 32.0f;
+  //float x = 32.0f, y = 0.0f, sy = 32.0f;
+  float sy = 32.0f;
   char *character = (char*)str;
   while (*character != '\0') {
     char c = *character++;

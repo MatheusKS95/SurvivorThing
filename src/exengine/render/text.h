@@ -22,6 +22,6 @@ void ex_font_init();
 
 ex_font_t* ex_font_load(const char *path, const char *letters);
 
-void ex_font_dbg(ex_font_t *f);
+void ex_font_dbg(ex_font_t *f, const char *str, float x, float y, float w, float h);
 
 #endif // EX_TEXT_H
