@@ -27,7 +27,7 @@ void game_init()
   e->position[1] = 10.0f;
   e->position[0] = 5.0f;
   e->position[2] = 0.0f;
-
+  
   // load a sound
   sound = ex_sound_load("data/ambient.ogg", EX_SOURCE_STREAMING, EX_SOURCE_LOOPING);
   ex_sound_master_volume(0.5f);
@@ -51,6 +51,7 @@ void game_init()
   font = ex_font_load("data/fonts/OpenSans-Regular.ttf", "abcdefghijklmnopqrstuvwxyzHW!_");
 
   ex_vga_init();
+  ex_sound_restart(sound);
 }
 
 void game_update(double dt, double ft)
@@ -206,13 +207,35 @@ void game_exit()
 
 void game_keypressed(uint32_t key)
 {
-  // printf("key %i\n", key);
+  //printf("key %i\n", key);
+  if(key == 18)
+      ex_sound_restart(sound);
 }
 
 void game_mousepressed(uint8_t button)
 {
   // printf("button %i\n", button);
-  ex_sound_restart(sound);
+    memcpy(cube->position, camera->position, sizeof(vec3));
+    vec3 p;
+    vec3_scale(p, camera->front, 2.5f);
+    vec3_add(p, p, e->position);
+    p[1] += 0.5f;
+
+    vec3_sub(p, p, cube->position);
+
+    float f = vec3_len(p);
+    if (f > 1.5f) {
+      ex_keys_down[SDL_SCANCODE_LCTRL] = 0;
+    }
+
+    if (f > 1.0f)
+      f *= f;
+
+    vec3_norm(p, p);
+    vec3_scale(p, p, f*35.0f);
+    f = cube->velocity[1];
+    memcpy(cube->velocity, p, sizeof(vec3));
+    cube->velocity[1] += f*0.1f;
 }
 
 void game_mousemoition(int xrel, int yrel)
