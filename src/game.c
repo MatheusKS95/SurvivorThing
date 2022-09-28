@@ -1,3 +1,4 @@
+//TODO: queue for projectiles
 #include "engine.h"
 #include "inc/game.h"
 
@@ -168,6 +169,8 @@ ctrl_end:
     e->velocity[1] = -50.0f;
   if (ex_keys_down[SDL_SCANCODE_SPACE] && e->grounded == 1) {
     e->velocity[1] = 20.0f;
+  if (ex_keys_down[SDL_SCANCODE_P])
+    e->velocity[0] = 50.0f;
   }
   ex_sound_play(sound);
   move_speed = 100.0f;
